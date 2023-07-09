@@ -6,15 +6,16 @@ const fragment = document.createDocumentFragment();
 
 const createThumbnail = (item) => {
   const pictureClone = picture.cloneNode(true);
-  pictureClone.querySelector('.picture_img').src = item.url;
-  pictureClone.querySelector('.picture_img').alt = item.description;
-  pictureClone.querySelector('.picture_likes').textContent = item.likes;
-  pictureClone.querySelector('.picture_comments').textContent = item.comments.length;
-  fragment.appendChild(pictureClone);
+  const image = pictureClone.querySelector('.picture__img');
+  image.src = item.url;
+  image.alt = item.description;
+  pictureClone.querySelector('.picture__likes').textContent = item.likes;
+  pictureClone.querySelector('.picture__comments').textContent = item.comments.length;
+  fragment.append(pictureClone);
 };
 const renderThumbnails = () => {
   data.forEach((item) => createThumbnail(item));
-  console.log(fragment);
-}
-renderThumbnails();
-export { renderThumbnails };
+  picturesContainer.append(fragment);
+};
+
+export {renderThumbnails};
