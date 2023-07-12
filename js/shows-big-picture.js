@@ -8,7 +8,7 @@ const bigPictureDescription = document.querySelector('.social__caption');
 const bigPictureLikes = document.querySelector('.likes-count');
 const commentsContainer = document.querySelector('.social__comments');
 const commentsTemplate = document.querySelector('.social__comment');
-const commentsLoaderButton = document.querySelector('.comments-loader');
+const commentsLoader = document.querySelector('.comments-loader');
 
 const COMMENT_COUNTER = 5;
 let showingComments = 0;
@@ -20,10 +20,10 @@ const fillCommentsCounter = () =>{
 
 const setButtonState = () => {
   if (showingComments >= comments.length) {
-    commentsLoaderButton.classList.add('hidden');
+    commentsLoader.classList.add('hidden');
     return;
   }
-  commentsLoaderButton.classList.remove('hidden');
+  commentsLoader.classList.remove('hidden');
 };
 
 const createComment = (item) => {
@@ -38,11 +38,12 @@ const renderComments = () => {
   const fragment = document.createDocumentFragment();
   const currentComments = comments.slice(showingComments, showingComments + COMMENT_COUNTER);
   showingComments = Math.min(showingComments + COMMENT_COUNTER, comments.length);
+  currentComments.forEach((comment) => fragment.append(createComment(comment)));
   commentsContainer.append(fragment);
   setButtonState();
   fillCommentsCounter();
 };
-const onCommentsLoaderButtonClick = (event) => {
+const onCommentsLoaderClick = (event) => {
   event.preventDefault();
   renderComments();
 };
@@ -52,14 +53,14 @@ const openModal = () => {
   document.body.classList.add('modal-open');
   buttonClose.addEventListener('click', onButtonCloseClick);
   document.addEventListener('keydown', onDocumentKeydown);
-  commentsLoaderButton.addEventListener('click', onCommentsLoaderButtonClick);
+  commentsLoader.addEventListener('click', onCommentsLoaderClick);
 };
 const closeModal = () => {
   bigPictureContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
   buttonClose.removeEventListener('click', onButtonCloseClick);
   document.removeEventListener('keydown', onDocumentKeydown);
-  commentsLoaderButton.removeEventListener('click', onCommentsLoaderButtonClick);
+  commentsLoader.removeEventListener('click', onCommentsLoaderClick);
   showingComments = 0;
 };
 
