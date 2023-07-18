@@ -36,10 +36,10 @@ const EFFECTS = {
   },
   default: {
     name: 'default',
-    min: 1,
+    min: 0,
     max: 1,
-    step: 1,
-    unit: ''
+    step: 0.1,
+    unit: '',
   },
 };
 
@@ -48,19 +48,24 @@ const slider = document.querySelector('.effect-level__slider');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectSaturation = document.querySelector('.effect-level__value');
 
+const onSliderUpdate = (name, unit) => {
+  if (slider.noUiSlider) {
+    slider.noUiSlider.off('update');
+  }
+  slider.noUiSlider.on('update', () => {
+    const saturation = slider.noUiSlider.get();
+    uploadPreview.style.filter = `${name}(${saturation}${unit})`;
+    effectSaturation.value = saturation;
+  });
+};
 
 const setContainerState = (value) => {
   if (value === 'none') {
     sliderContainer.classList.add('hidden');
     uploadPreview.style.filter = 'none';
-    return;
+  } else {
+    sliderContainer.classList.remove('hidden');
   }
-  sliderContainer.classList.remove('hidden');
-};
-
-const setFilterState = (currentName, saturation, currentUnit) =>{
-  uploadPreview.style.filter = `${currentName}(${saturation}${currentUnit})`;
-  effectSaturation.value = saturation;
 };
 
 const initEffects = (value) => {
@@ -75,16 +80,13 @@ const initEffects = (value) => {
     start: max,
     connect: 'lower',
   });
-  slider.noUiSlider.on('update', () => {
-    const saturation = slider.noUiSlider.get();
-    setFilterState(name,saturation, unit);
-  });
-};
 
+  onSliderUpdate(name, unit);
+};
 
 const updateEffects = (value) => {
   setContainerState(value);
-  if (value === 'none'){
+  if (value === 'none') {
     return;
   }
   const { min, max, step, name, unit } = EFFECTS[value] || EFFECTS.default;
@@ -97,7 +99,8 @@ const updateEffects = (value) => {
     step: step,
     start: max,
   });
-  setFilterState (name, max, unit);
+
+  onSliderUpdate(name, unit);
 };
 
 export { initEffects, updateEffects };
