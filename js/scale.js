@@ -1,6 +1,6 @@
 const SCALE_STEP = 25;
-const MAX_SCALE = 25;
-const MIN_SCALE = 100;
+const MAX_SCALE = 100;
+const MIN_SCALE = 25;
 const DIVIDER = 100;
 
 const imageUpload = document.querySelector('.img-upload__preview img');

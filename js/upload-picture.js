@@ -1,9 +1,15 @@
 import { isEscapeKey, isNotInput } from './util.js';
 import { initScale, resetScale } from './scale.js';
+import { initEffects, updateEffects } from './effects-editor.js';
+
 const uploadInput = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadCancel = document.querySelector('.img-upload__cancel');
 const uploadForm = document.querySelector('.img-upload__form');
+const effectsList = document.querySelector('.effects__list');
+const currentEffectValue = effectsList.querySelector('input:checked').value;
+
+const onEffectListChange = (event) => updateEffects(event.target.value);
 
 const openUploadForm = () => {
   uploadOverlay.classList.remove('hidden');
@@ -17,6 +23,7 @@ const closeUploadForm = () => {
   uploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  updateEffects(currentEffectValue);
 };
 
 const onUploadInputChange = () => openUploadForm();
@@ -34,9 +41,12 @@ function onDocumentKeydown(event) {
 
 const initUploadForm = () => {
   initScale();
+  initEffects(currentEffectValue);
+  effectsList.addEventListener('change', onEffectListChange);
   uploadInput.addEventListener('change', onUploadInputChange);
   uploadForm.addEventListener('submit', onUploadFormSubmit);
   uploadCancel.addEventListener('click', onUploadCancelClick);
 };
 
 export { initUploadForm };
+
