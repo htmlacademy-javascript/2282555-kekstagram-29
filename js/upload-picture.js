@@ -1,6 +1,7 @@
 import { isEscapeKey, isNotInput } from './util.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, updateEffects } from './effects-editor.js';
+import { initValidation, resetPristine, validatePristine } from './validation.js';
 
 const uploadInput = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -20,6 +21,7 @@ const openUploadForm = () => {
 const closeUploadForm = () => {
   uploadForm.reset();
   resetScale();
+  resetPristine();
   uploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -28,8 +30,11 @@ const closeUploadForm = () => {
 
 const onUploadInputChange = () => openUploadForm();
 const onUploadFormSubmit = (event) => {
-  event.preventDefault();
+  if(!validatePristine()){
+    event.preventDefault();
+  }
 };
+
 const onUploadCancelClick = () => closeUploadForm();
 
 function onDocumentKeydown(event) {
@@ -40,6 +45,7 @@ function onDocumentKeydown(event) {
 }
 
 const initUploadForm = () => {
+  initValidation();
   initScale();
   initEffects(currentEffectValue);
   effectsList.addEventListener('change', onEffectListChange);
