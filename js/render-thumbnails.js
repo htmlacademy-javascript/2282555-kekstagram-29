@@ -1,8 +1,8 @@
-import { createPublication } from './data.js';
+
 import { showsBigPicture } from './shows-big-picture.js';
+
 const picturesContainer = document.querySelector('.pictures');
 const picture = document.querySelector('#picture').content.querySelector('.picture');
-const data = createPublication();
 const fragment = document.createDocumentFragment();
 
 const createThumbnail = (item) => {
@@ -18,7 +18,7 @@ const createThumbnail = (item) => {
   });
   fragment.append(pictureClone);
 };
-const renderThumbnails = () => {
+const renderThumbnails = (data) => {
   data.forEach((item) => createThumbnail(item));
   picturesContainer.append(fragment);
 };
