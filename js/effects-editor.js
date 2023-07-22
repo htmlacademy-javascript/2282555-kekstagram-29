@@ -48,7 +48,7 @@ const slider = document.querySelector('.effect-level__slider');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectSaturation = document.querySelector('.effect-level__value');
 
-const onSliderUpdate = (name, unit) => {
+const updateSlider = (name, unit) => {
   if (slider.noUiSlider) {
     slider.noUiSlider.off('update');
   }
@@ -81,7 +81,7 @@ const initEffects = (value) => {
     connect: 'lower',
   });
 
-  onSliderUpdate(name, unit);
+  updateSlider(name, unit);
 };
 
 const updateEffects = (value) => {
@@ -100,7 +100,7 @@ const updateEffects = (value) => {
     start: max,
   });
 
-  onSliderUpdate(name, unit);
+  updateSlider(name, unit);
 };
 
 export { initEffects, updateEffects };
