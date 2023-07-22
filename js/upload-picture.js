@@ -62,13 +62,13 @@ const errorUpload = () => {
   setButtonState(false);
 };
 
-const onUploadFormSubmit = (event) => {
+async function onUploadFormSubmit (event) {
   event.preventDefault();
   if (validatePristine()) {
     setButtonState(true);
-    sendData(SEND_URL, new FormData(event.target), successUpload, errorUpload);
+    await sendData(SEND_URL, new FormData(event.target), successUpload, errorUpload);
   }
-};
+}
 
 const initUploadForm = () => {
   initValidation();
