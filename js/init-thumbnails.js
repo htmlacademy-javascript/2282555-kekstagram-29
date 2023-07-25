@@ -1,6 +1,6 @@
 import { getData } from './api.js';
 import { renderThumbnails } from './render-thumbnails.js';
-import { initFilters, getFilteringData } from './filter.js';
+import { initFilters, getFilteringData } from './filters.js';
 import { showMessage } from './messages.js';
 
 const DATA_URL = 'https://29.javascript.pages.academy/kekstagram/data';
