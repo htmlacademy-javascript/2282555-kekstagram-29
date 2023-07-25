@@ -8,7 +8,7 @@ import { showMessage } from './messages.js';
 const SEND_URL = 'https://29.javascript.pages.academy/kekstagram';
 const SUCCESS_MESSAGE = 'Изображение загружено';
 const ERROR_MESSAGE = 'Ошибка загрузки изображения';
-const SUCCESS_BUTTON_TEXT = 'Продолжить';
+const SUCCESS_BUTTON_TEXT = 'Круто!';
 const ERROR_BUTTON_TEXT = 'Попробовать еще раз';
 
 const uploadInput = document.querySelector('.img-upload__input');
