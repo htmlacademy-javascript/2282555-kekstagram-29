@@ -4,6 +4,7 @@ import { initScale, resetScale } from './scale.js';
 import { initEffects, updateEffects } from './effects-editor.js';
 import { initValidation, resetPristine, validatePristine } from './validation.js';
 import { showMessage } from './messages.js';
+import { renderUploadPicture } from './upload-picture.js';
 
 const SEND_URL = 'https://29.javascript.pages.academy/kekstagram';
 const SUCCESS_MESSAGE = 'Изображение загружено';
@@ -41,7 +42,9 @@ const setButtonState = (state) => {
   submitButton.disabled = state;
 };
 
-const onUploadInputChange = () => openUploadForm();
+const onUploadInputChange = (event) =>{
+  renderUploadPicture(event);
+};
 const onUploadCancelClick = () => closeUploadForm();
 
 function onDocumentKeydown(event) {
@@ -80,5 +83,5 @@ const initUploadForm = () => {
   uploadCancel.addEventListener('click', onUploadCancelClick);
 };
 
-export { initUploadForm };
+export { initUploadForm, openUploadForm };
 

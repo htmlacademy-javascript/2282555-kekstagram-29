@@ -23,14 +23,13 @@ const sortRandom = (data) => {
 };
 
 const getFilteringData = (id, data) => {
-  switch (id) {
-    case FILTER_RANDOM:
-      return sortRandom(data);
-    case FILTER_DISCUSSED:
-      return sortByCommentsLength(data);
-    default:
-      return data;
+  if (id === FILTER_RANDOM) {
+    return sortRandom(data);
   }
+  if (id === FILTER_DISCUSSED) {
+    return sortByCommentsLength(data);
+  }
+  return data;
 };
 
 const renderFilteringPictures = (id, data) => {
