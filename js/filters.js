@@ -12,7 +12,7 @@ const picturesContainer = document.querySelector('.pictures');
 
 const sortByCommentsLength = (data) => data.slice().sort((a, b) => b.comments.length - a.comments.length);
 
-const sortRandom = (data) => {
+const sortByRandom = (data) => {
   const dataClone = data.slice();
   for (let i = dataClone.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -24,11 +24,12 @@ const sortRandom = (data) => {
 
 const getFilteringData = (id, data) => {
   if (id === FILTER_RANDOM) {
-    return sortRandom(data);
+    return sortByRandom(data);
   }
   if (id === FILTER_DISCUSSED) {
     return sortByCommentsLength(data);
   }
+
   return data;
 };
 
@@ -41,7 +42,6 @@ const renderPictures = debounce((id, data) => renderFilteringPictures(id, data),
 
 const initFilters = (data) => {
   filters.classList.remove('img-filters--inactive');
-
   filtersForm.addEventListener('click', (event) => {
     if (event.target.closest('.img-filters__button') && !event.target.closest('.img-filters__button--active')) {
       document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');

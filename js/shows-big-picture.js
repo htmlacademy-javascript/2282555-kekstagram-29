@@ -1,5 +1,7 @@
 import { isEscapeKey } from './util.js';
 
+const COMMENT_COUNTER = 5;
+
 const bigPictureContainer = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('.big-picture__cancel');
 const commentsCount = document.querySelector('.social__comment-count');
@@ -10,12 +12,11 @@ const commentsContainer = document.querySelector('.social__comments');
 const commentsTemplate = document.querySelector('.social__comment');
 const commentsLoader = document.querySelector('.comments-loader');
 
-const COMMENT_COUNTER = 5;
 let showingComments = 0;
 let comments;
 
 const fillCommentsCounter = () =>{
-  commentsCount.innerHTML = `${showingComments}из <span class="comments-count">${comments.length}</span> комментариев</div>`;
+  commentsCount.innerHTML = `${showingComments} из <span class="comments-count">${comments.length}</span> комментариев</div>`;
 };
 
 const setButtonState = () => {
@@ -34,6 +35,7 @@ const createComment = (item) => {
   newComment.querySelector('.social__text').textContent = item.message;
   return newComment;
 };
+
 const renderComments = () => {
   const fragment = document.createDocumentFragment();
   const currentComments = comments.slice(showingComments, showingComments + COMMENT_COUNTER);
@@ -43,6 +45,7 @@ const renderComments = () => {
   setButtonState();
   fillCommentsCounter();
 };
+
 const onCommentsLoaderClick = (event) => {
   event.preventDefault();
   renderComments();
@@ -55,6 +58,7 @@ const openModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
   commentsLoader.addEventListener('click', onCommentsLoaderClick);
 };
+
 const closeModal = () => {
   bigPictureContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -89,4 +93,5 @@ const showsBigPicture = (data) => {
   fillModal(data);
   openModal();
 };
+
 export { showsBigPicture };

@@ -43,7 +43,7 @@ const EFFECTS = {
   },
 };
 
-const uploadPreview = document.querySelector('.img-upload__preview');
+const uploadPreview = document.querySelector('.img-upload__preview img');
 const slider = document.querySelector('.effect-level__slider');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectSaturation = document.querySelector('.effect-level__value');
@@ -73,14 +73,13 @@ const initEffects = (value) => {
   setContainerState(value);
   noUiSlider.create(slider, {
     range: {
-      min: min,
-      max: max
+      min,
+      max
     },
-    step: step,
+    step,
     start: max,
     connect: 'lower',
   });
-
   updateSlider(name, unit);
 };
 
@@ -90,16 +89,14 @@ const updateEffects = (value) => {
     return;
   }
   const { min, max, step, name, unit } = EFFECTS[value] || EFFECTS.default;
-
   slider.noUiSlider.updateOptions({
     range: {
-      'min': min,
-      'max': max
+      min,
+      max
     },
-    step: step,
+    step,
     start: max,
   });
-
   updateSlider(name, unit);
 };
 

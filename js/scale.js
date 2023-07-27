@@ -27,15 +27,16 @@ const onScaleControlSmallerClick = (event) => {
   if (currentScale > MIN_SCALE) {
     changeScale(currentScale -= SCALE_STEP);
   }
-
 };
 
 const initScale = () => {
   scaleControlBigger.addEventListener('click', onScaleControlBiggerClick);
   scaleControlSmaller.addEventListener('click', onScaleControlSmallerClick);
 };
+
 const resetScale = () => {
   currentScale = MAX_SCALE;
   changeScale(MAX_SCALE);
 };
+
 export { initScale, resetScale };

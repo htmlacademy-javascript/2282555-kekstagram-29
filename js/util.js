@@ -1,6 +1,5 @@
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
-const isNotInput = (event) => !event.target.closest('input') || !event.target.closest('textarea');
+const isEscapeKey = (event) => event.key === 'Escape';
 
 const debounce = (callback, timeoutDelay) => {
   let timeoutId;
@@ -11,4 +10,4 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export { isEscapeKey, isNotInput, debounce};
+export { isEscapeKey, debounce};

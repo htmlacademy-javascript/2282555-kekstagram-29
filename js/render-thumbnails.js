@@ -18,6 +18,7 @@ const createThumbnail = (item) => {
   });
   fragment.append(pictureClone);
 };
+
 const renderThumbnails = (data) => {
   data.forEach((item) => createThumbnail(item));
   picturesContainer.append(fragment);

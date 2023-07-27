@@ -9,7 +9,6 @@ const createElement = (template) => {
   return div.firstChild;
 };
 
-
 const createTemplate = (state, text, buttonText) => (
   `<section class="${state}">
     <div class="${state}__inner">
@@ -21,7 +20,6 @@ const createTemplate = (state, text, buttonText) => (
 
 const onDocumentKeydown = (event) =>{
   if (isEscapeKey(event)){
-    event.stopPropagation();
     event.preventDefault();
     closeMessage();
   }
