@@ -51,7 +51,7 @@ const onUploadInputChange = (event) =>{
 const onUploadCancelClick = () => closeUploadForm();
 
 function onDocumentKeydown(event) {
-  if (isEscapeKey(event) && !event.target.closest('.text__hashtags') && !event.target.closest('.text__description') && !document.querySelector('error')) {
+  if (isEscapeKey(event) && !event.target.closest('.text__hashtags') && !event.target.closest('.text__description') && !document.querySelector('.error')) {
     event.preventDefault();
     closeUploadForm();
   }
