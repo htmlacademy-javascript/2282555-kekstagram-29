@@ -1,4 +1,4 @@
-import { isEscapeKey, isNotInput } from './util.js';
+import { isEscapeKey } from './util.js';
 import { sendData } from './api.js';
 import { initScale, resetScale } from './scale.js';
 import { initEffects, updateEffects } from './effects-editor.js';
@@ -11,6 +11,8 @@ const SUCCESS_MESSAGE = 'Изображение загружено';
 const ERROR_MESSAGE = 'Ошибка загрузки изображения';
 const SUCCESS_BUTTON_TEXT = 'Круто!';
 const ERROR_BUTTON_TEXT = 'Попробовать еще раз';
+const ERROR_STATE = 'error';
+const SUCCESS_STATE = 'success';
 
 const uploadInput = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -45,23 +47,24 @@ const setButtonState = (state) => {
 const onUploadInputChange = (event) =>{
   renderUploadPicture(event);
 };
+
 const onUploadCancelClick = () => closeUploadForm();
 
 function onDocumentKeydown(event) {
-  if (isEscapeKey(event) && !isNotInput(event)) {
+  if (isEscapeKey(event) && !event.target.closest('.text__hashtags') && !event.target.closest('.text__description') && !document.querySelector('error')) {
     event.preventDefault();
     closeUploadForm();
   }
 }
 
 const successUpload = () => {
-  showMessage('success', SUCCESS_MESSAGE, SUCCESS_BUTTON_TEXT);
+  showMessage(SUCCESS_STATE, SUCCESS_MESSAGE, SUCCESS_BUTTON_TEXT);
   setButtonState(false);
   closeUploadForm();
 };
 
 const errorUpload = () => {
-  showMessage('error', ERROR_MESSAGE, ERROR_BUTTON_TEXT);
+  showMessage(ERROR_STATE, ERROR_MESSAGE, ERROR_BUTTON_TEXT);
   setButtonState(false);
 };
 

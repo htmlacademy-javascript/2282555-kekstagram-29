@@ -15,12 +15,13 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper'
 });
 
+const createHashTags = (value) => value.trim().toLowerCase().split(' ').filter((it) => it);
+
 const checkCommentLength = (value) => value.length <= COMMENT_MAX_LENGTH;
-const createHashTags = (value) => value.trim().toLowerCase().split(' ');
 
 const checkHashtagValidity = (value) => {
   if(!value){
-    return;
+    return true;
   }
   const hashtags = createHashTags(value);
   return hashtags.every((element) => HASHTAG_REGEXP.test(element));
@@ -37,6 +38,7 @@ const checkHashtagsDuplication = (value) => {
 };
 
 const validatePristine = () => pristine.validate();
+
 const resetPristine = () => pristine.reset();
 
 const initValidation = () => {
