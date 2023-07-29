@@ -18,14 +18,16 @@ const changeScale = (value) => {
 const onScaleControlBiggerClick = (event) => {
   event.preventDefault();
   if (currentScale < MAX_SCALE) {
-    changeScale(currentScale += SCALE_STEP);
+    currentScale += SCALE_STEP;
+    changeScale(currentScale);
   }
 };
 
 const onScaleControlSmallerClick = (event) => {
   event.preventDefault();
   if (currentScale > MIN_SCALE) {
-    changeScale(currentScale -= SCALE_STEP);
+    currentScale -= SCALE_STEP;
+    changeScale(currentScale);
   }
 };
 
